@@ -8,12 +8,12 @@ class Exporter(abc.ABC):
     connecting to a data source, creating tables, and adding data.
     """
 
-    @staticmethod
+    @classmethod
     @abc.abstractmethod
-    def before():
+    def before(cls):
         """
         Connect to the data source. Or do anything important
-        before the module starts
+        before the module starts (Maybe add some logging here?)
         """
         pass
 
@@ -44,19 +44,19 @@ class Exporter(abc.ABC):
 
 class aExporter(abc.ABC):
     """
-    Abstract class for exporting data. Subclasses should implement methods for
+    Abstract class for exporting data asynchronously. Subclasses should implement methods for
     connecting to a data source, creating tables, and adding data.
     """
-    
-    @staticmethod
+
+    @classmethod
     @abc.abstractmethod
-    async def before():
+    async def before(cls):
         """
         Connect to the data source. Or do anything important
         before the module starts
         """
         pass
-    
+
     @classmethod
     @abc.abstractmethod
     async def create_table(cls):
@@ -72,7 +72,7 @@ class aExporter(abc.ABC):
         Add data to the table in the data source.
         """
         pass
-    
+
     @classmethod
     @abc.abstractmethod
     async def after(cls):
@@ -87,7 +87,7 @@ class Extractor(abc.ABC):
     Abstract class for creating data extractors. Subclasses should implement methods
     for checking the file, processing the file, and finally returning data
     """
-    
+
     @staticmethod
     @abc.abstractmethod
     def check_file():
@@ -95,7 +95,7 @@ class Extractor(abc.ABC):
         Check if the file meets the criteria to be processed
         """
         pass
-    
+
     @classmethod
     @abc.abstractmethod
     def extract_data(cls):
