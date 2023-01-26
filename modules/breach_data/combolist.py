@@ -1,6 +1,7 @@
 from itertools import islice
 from modules.module import Extractor
 import re
+import os
 
 class CombolistExtractor(Extractor):
     """
@@ -20,17 +21,15 @@ class CombolistExtractor(Extractor):
         """
         Check if the file at the given file path is a valid combolist file.
         """
-        try:
-            with open(file, encoding='utf-8') as chk_file:
-                # Read the first 5 lines to check if it's valid
-                for line in list(islice(chk_file, 5)):
-                    line = line.strip()
-                    if not re.search(':|;', line):
-                        # Raise an exception if the check fails
-                        raise ValueError(f"[{self.name}] {file}: Invalid file format")
-        # Raise an Exception if the check fails
-        except ValueError as ex:
-            print(f"{ex}")
+        if not os.path.isfile(file):
+            raise ValueError(f"[{self.name}] {file}: Invalid file")
+        with open(file, encoding='utf-8') as chk_file:
+            # Read the first 5 lines to check if it's valid
+            for line in list(islice(chk_file, 5)):
+                line = line.strip()
+                if not re.search(':|;', line):
+                    # Raise an exception if the check fails
+                    raise ValueError(f"[{self.name}] {file}: Invalid file format")
 
     def extract_data(self, file_path):
         """

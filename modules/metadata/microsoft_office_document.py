@@ -2,8 +2,8 @@
 # Microsoft Office Data Extractor
 import os
 import asyncio
-from sqlite_exporter import SQLiteExporter
-from module import Extractor
+from modules.exporters.sqlite_exporter import SQLiteExporter
+from modules.module import Extractor
 
 class MicrosoftOfficeExtractor(Extractor):
     """

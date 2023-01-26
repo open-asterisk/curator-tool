@@ -32,6 +32,7 @@ class CSVexporter(Exporter):
         """
         # Try to open the CSV file and create a header
         try:
+            self.before()
             if not os.path.isfile(self.csvfile):
                 with open(self.csvfile, 'w+', encoding='utf-8', newline='') as csv_file:
                     # Create a CSV Writer object
@@ -40,8 +41,10 @@ class CSVexporter(Exporter):
                     csvwriter.writeheader()
             else:
                 pass
-        except Exception as ex:
-            print(f"[{self.name}] ERROR CREATING TABLE: {ex}")
+        except Exception:
+            pass
+        finally:
+            self.after()
 
     def add_data(self, data_dict):
         """Write data to the csv file
@@ -51,6 +54,7 @@ class CSVexporter(Exporter):
         """
         # Add data to the csv
         try:
+            self.before()
             with open(self.csvfile, 'a+', encoding='utf-8', newline='') as csv_file:
                 # Create CSV writer object
                 csvwriter = csv.DictWriter(csv_file, [header for header in data_dict.keys()])
@@ -60,6 +64,9 @@ class CSVexporter(Exporter):
 
         except Exception as ex:
             print(f"[{self.name}] ERROR INSERTING DATA: {ex}")
+
+        finally:
+            self.after()
 
     def after(self):
         """
