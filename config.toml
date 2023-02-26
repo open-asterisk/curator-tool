@@ -14,6 +14,12 @@ enabled = false
 name = "SQLiteExporter"
 location = "./modules/exporters/sqlite_exporter.py"
 database = 'database.sql'
+enabled = false
+
+[[exporters]]
+name = "ElasticExporter"
+location = "./modules/exporters/elasticexporter.py"
+database = "database.edb"
 enabled = true
 
 # Modules Options
