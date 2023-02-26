@@ -2,7 +2,7 @@ from elasticsearch import AsyncElasticsearch
 from contextlib import asynccontextmanager
 from modules.module import aExporter
 
-class ElasticSearchExporter(aExporter):
+class ElasticExporter(aExporter):
 
     name = "ElasticSearch Exporter"
     author = "ef1500, pog"
