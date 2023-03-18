@@ -12,7 +12,7 @@ class ElasticExporter(aExporter):
         self.index_name = index_name
         self.host = host
         self.port = port
-        self.es = AsyncElasticsearch([f'{host}:{port}'])
+        self.es = AsyncElasticsearch([f'http://{host}:{port}/'])
 
     @staticmethod
     async def before(index_name):
