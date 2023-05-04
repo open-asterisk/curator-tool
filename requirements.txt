@@ -1,2 +1,4 @@
 aiosqlite
 tqdm
+toml
+elasticsearch
