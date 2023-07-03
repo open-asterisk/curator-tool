@@ -1,7 +1,16 @@
 # Open Asterisk Curator Tool
+import importlib
 import classifier.classifier as classifier
 import backend
 import argparse
+
+# Check if the required modules are installed before starting the tool
+with open('requirements.txt', 'r') as file:
+    required_modules = [line.strip() for line in file]
+for module in required_modules:
+    if importlib.util.find_spec(module) is None:
+      print("Not all required modules specified in the requirements.txt file are installed. Rerun the tool after installing them.")
+      exit()
 
 BANNER = """
                                                   |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-|
